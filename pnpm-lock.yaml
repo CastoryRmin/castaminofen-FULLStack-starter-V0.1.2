@@ -73,6 +73,9 @@ importers:
 
   apps/api:
     dependencies:
+      '@castaminofen/auth':
+        specifier: workspace:*
+        version: link:../../packages/auth
       '@castaminofen/config':
         specifier: workspace:*
         version: link:../../packages/config

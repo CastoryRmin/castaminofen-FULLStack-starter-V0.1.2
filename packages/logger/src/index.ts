@@ -8,7 +8,7 @@ export interface LogEntry {
   readonly level: LogLevel;
   readonly message: string;
   readonly timestamp: string;
-  readonly context?: string;
+  readonly context: string | undefined;
 }
 
 export class LoggerService implements PackageContract {
@@ -42,7 +42,7 @@ export class LoggerService implements PackageContract {
       level,
       message,
       timestamp: new Date().toISOString(),
-      context,
+      context: context ?? undefined,
     };
 
     this.sink(entry);

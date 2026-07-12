@@ -1,4 +1,32 @@
+'use client';
+
+import { FormEvent, useState } from 'react';
+
+import { loginUser } from '../auth/client';
+
 export default function LoginPage() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [message, setMessage] = useState('');
+  const [error, setError] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setIsSubmitting(true);
+    setError('');
+    setMessage('');
+
+    try {
+      const result = await loginUser({ email, password });
+      setMessage(`Welcome back, ${result.user.name}!`);
+    } catch (submitError) {
+      setError(submitError instanceof Error ? submitError.message : 'Login failed');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <main
       style={{
@@ -20,29 +48,40 @@ export default function LoginPage() {
       >
         <h1 style={{ marginTop: 0 }}>Login</h1>
         <p style={{ color: '#64748b' }}>Sign in to continue listening and bookmark episodes.</p>
-        <form style={{ display: 'grid', gap: 12 }}>
+        <form onSubmit={handleSubmit} style={{ display: 'grid', gap: 12 }}>
           <input
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
             placeholder="Email"
+            type="email"
+            required
             style={{ padding: '12px 14px', borderRadius: 10, border: '1px solid #cbd5e1' }}
           />
           <input
+            value={password}
+            onChange={(event) => setPassword(event.target.value)}
             placeholder="Password"
             type="password"
+            required
             style={{ padding: '12px 14px', borderRadius: 10, border: '1px solid #cbd5e1' }}
           />
           <button
-            type="button"
+            type="submit"
+            disabled={isSubmitting}
             style={{
               padding: '12px 14px',
               borderRadius: 10,
               border: 0,
               background: '#111827',
               color: '#fff',
+              cursor: isSubmitting ? 'wait' : 'pointer',
             }}
           >
-            Continue
+            {isSubmitting ? 'Signing in…' : 'Continue'}
           </button>
         </form>
+        {message ? <p style={{ color: '#0f766e', marginTop: 12 }}>{message}</p> : null}
+        {error ? <p style={{ color: '#b91c1c', marginTop: 12 }}>{error}</p> : null}
       </div>
     </main>
   );

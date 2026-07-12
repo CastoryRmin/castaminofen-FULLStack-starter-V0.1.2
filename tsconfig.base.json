@@ -8,14 +8,15 @@
     "declaration": true,
     "sourceMap": true,
     "baseUrl": ".",
-    "ignoreDeprecations": "6.0",
+    "ignoreDeprecations": "5.0",
     "paths": {},
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
     "noUncheckedIndexedAccess": true,
     "exactOptionalPropertyTypes": true,
-    "types": ["node"]
+    "types": ["node"],
+    "typeRoots": ["./", "./node_modules/@types"]
   },
   "exclude": ["dist", "node_modules"]
 }
