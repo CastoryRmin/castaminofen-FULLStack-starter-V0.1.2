@@ -1,0 +1,15 @@
+*[33m-[m[33m.[m   [33m46dc17d[m[33m ([m[1;35mrefs/stash[m[33m)[m On main: WIP before pull
+[31m|[m[32m\[m [33m\[m  
+[31m|[m [32m|[m * [33maf4c8d6[m untracked files on main: 3945716 ok
+[31m|[m * [33ma44dcc4[m index on main: 3945716 ok
+[31m|[m[31m/[m  
+* [33m3945716[m ok
+* [33m5ecf4b0[m ok
+[33m|[m * [33m720fbbf[m[33m ([m[1;32mmain[m[33m)[m Prompt شماره ۳ Admin
+[33m|[m * [33m07e12d6[m Prompt شماره ۲ app-api
+[33m|[m[33m/[m  
+[33m|[m * [33mdfab473[m[33m ([m[1;34mgrafted[m[33m, [m[1;36mHEAD[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m ok
+[33m|[m * [33md953942[m[33m ([m[1;31mupstream/dependabot/npm_and_yarn/typescript-6.0.3[m[33m, [m[1;31morigin/dependabot/npm_and_yarn/typescript-6.0.3[m[33m)[m Bump typescript from 5.9.3 to 6.0.3
+[33m|[m[33m/[m  
+[33m|[m * [33mda36847[m[33m ([m[1;31mupstream/dependabot/npm_and_yarn/prisma-7.8.0[m[33m, [m[1;31morigin/dependabot/npm_and_yarn/prisma-7.8.0[m[33m)[m Bump prisma from 5.22.0 to 7.8.0
+[33m|[m[33m/[m  
