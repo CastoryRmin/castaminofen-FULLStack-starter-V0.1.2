@@ -1,11 +1,27 @@
-# admin
+# پنل مدیریتی Castaminofen
 
-This app provides the admin surface for the platform and is intentionally scaffolded with placeholders for future feature work.
+این ماژول یک داشبورد ادمین حرفه‌ای و آماده‌ی استفاده را برای پلتفرم Castaminofen فراهم می‌کند.
 
-## Responsibilities
-- host the runtime entrypoint for the admin experience
-- consume shared workspace packages
-- expose a minimal, production-ready structure for local development
+## امکانات پیاده‌سازی‌شده
 
-## TODO
-- add real routes, services, or UI modules as needed
+- احراز هویت با ورود نمونه‌ی امن
+- کنترل دسترسی مبتنی بر نقش (RBAC)
+- داشبورد تحلیلی با شاخص‌های عملکرد
+- ماژول‌های مدیریتی برای کاربران، کانال‌ها، پادکست‌ها، قسمت‌ها و موارد دیگر
+- جست‌وجو، فیلتر، صفحه‌بندی و فرم‌های ویرایش/افزودن
+- طراحی پاسخگو و مناسب برای محیط‌های سازمانی
+
+## اجرای محلی
+
+```bash
+pnpm --filter @castaminofen/app-admin dev
+```
+
+پس از اجرا، پنل در آدرس زیر در دسترس است:
+
+- http://localhost:3001
+
+## اطلاعات ورود نمونه
+
+- ایمیل: admin@castaminofen.com
+- رمز عبور: Admin@2026
