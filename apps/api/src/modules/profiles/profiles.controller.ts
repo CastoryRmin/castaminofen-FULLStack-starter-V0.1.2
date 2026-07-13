@@ -1,5 +1,6 @@
-import { Body, Controller, Get, Param, Patch, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Param, Patch, Req, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { Request } from 'express';
 import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard';
 import { ProfilesService } from './profiles.service';
 import { UpdateProfileDto } from './dto/update-profile.dto';
@@ -17,7 +18,11 @@ export class ProfilesController {
   }
 
   @Patch(':userId')
-  update(@Param('userId') userId: string, @Body() dto: UpdateProfileDto) {
-    return this.profilesService.update(userId, dto);
+  update(
+    @Param('userId') userId: string,
+    @Body() dto: UpdateProfileDto,
+    @Req() req: Request & { user?: { id?: string; role?: string } },
+  ) {
+    return this.profilesService.update(userId, dto, req.user?.id ?? '', req.user?.role ?? 'user');
   }
 }

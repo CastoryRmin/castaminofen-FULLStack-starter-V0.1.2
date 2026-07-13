@@ -12,7 +12,7 @@ export class TagsService {
   }
 
   findAll() {
-    return this.prisma.tag.findMany();
+    return this.prisma.tag.findMany({ orderBy: { name: 'asc' } });
   }
 
   async findOne(id: string) {
@@ -22,10 +22,14 @@ export class TagsService {
   }
 
   async update(id: string, dto: UpdateTagDto) {
+    const tag = await this.prisma.tag.findUnique({ where: { id } });
+    if (!tag) throw new NotFoundException('Tag not found');
     return this.prisma.tag.update({ where: { id }, data: dto });
   }
 
   async remove(id: string) {
+    const tag = await this.prisma.tag.findUnique({ where: { id } });
+    if (!tag) throw new NotFoundException('Tag not found');
     await this.prisma.tag.delete({ where: { id } });
     return { deleted: true };
   }

@@ -1,5 +1,6 @@
-import { Body, Controller, Delete, Get, Param, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Req, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { Request } from 'express';
 import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard';
 import { BookmarksService } from './bookmarks.service';
 import { CreateBookmarkDto } from './dto/create-bookmark.dto';
@@ -12,8 +13,11 @@ export class BookmarksController {
   constructor(private readonly bookmarksService: BookmarksService) {}
 
   @Post()
-  create(@Body() dto: CreateBookmarkDto) {
-    return this.bookmarksService.create(dto);
+  create(
+    @Body() dto: CreateBookmarkDto,
+    @Req() req: Request & { user?: { id?: string; role?: string } },
+  ) {
+    return this.bookmarksService.create(dto, req.user?.id ?? '', req.user?.role ?? 'user');
   }
 
   @Get(':userId')
@@ -22,7 +26,7 @@ export class BookmarksController {
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.bookmarksService.remove(id);
+  remove(@Param('id') id: string, @Req() req: Request & { user?: { id?: string; role?: string } }) {
+    return this.bookmarksService.remove(id, req.user?.id ?? '', req.user?.role ?? 'user');
   }
 }

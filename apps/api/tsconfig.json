@@ -7,8 +7,22 @@
     "declarationMap": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "strictPropertyInitialization": false
+    "strictPropertyInitialization": false,
+    "baseUrl": ".",
+    "paths": {
+      "@castaminofen/core": ["../../packages/core/src/index.ts"],
+      "@castaminofen/config": ["../../packages/config/src/index.ts"],
+      "@castaminofen/logger": ["../../packages/logger/src/index.ts"],
+      "@castaminofen/types": ["../../packages/types/src/index.ts"]
+    }
   },
   "include": ["src/**/*.ts"],
-  "exclude": ["dist", "node_modules"]
+  "exclude": [
+    "dist",
+    "node_modules",
+    "src/app.ts",
+    "src/index.ts",
+    "src/**/*.spec.ts",
+    "src/**/*.test.ts"
+  ]
 }

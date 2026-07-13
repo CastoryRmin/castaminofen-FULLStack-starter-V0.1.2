@@ -1,6 +1,6 @@
-import { CoreService } from '@castaminofen/core';
-import { ConfigService } from '@castaminofen/config';
-import { LoggerService } from '@castaminofen/logger';
+import { CoreService } from '../../../packages/core/src/index';
+import { ConfigService as SharedConfigService } from '../../../packages/config/src/index';
+import { LoggerService } from '../../../packages/logger/src/index';
 
 export interface AppContract {
   readonly name: string;
@@ -17,7 +17,7 @@ export class AppBootstrap implements AppContract {
       enabled: true,
     });
 
-    const config = new ConfigService({
+    const config = new SharedConfigService({
       name: '@castaminofen/config',
       version: '0.1.0',
       enabled: true,

@@ -19,6 +19,7 @@ import { UploadsModule } from './modules/uploads/uploads.module';
 import { AdminModule } from './modules/admin/admin.module';
 import { HealthModule } from './modules/health/health.module';
 import { PrismaModule } from './common/prisma/prisma.module';
+import { ConfigService } from './common/config/config.service';
 import { HomeController } from './modules/home/home.controller';
 import { HomeService } from './modules/home/home.service';
 
@@ -46,6 +47,7 @@ import { HomeService } from './modules/home/home.service';
   controllers: [HomeController],
   providers: [
     HomeService,
+    ConfigService,
     {
       provide: APP_GUARD,
       useClass: ThrottlerGuard,

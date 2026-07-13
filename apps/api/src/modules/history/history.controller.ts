@@ -1,5 +1,6 @@
-import { Body, Controller, Delete, Get, Param, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Req, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { Request } from 'express';
 import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard';
 import { HistoryService } from './history.service';
 import { CreateHistoryDto } from './dto/create-history.dto';
@@ -12,8 +13,11 @@ export class HistoryController {
   constructor(private readonly historyService: HistoryService) {}
 
   @Post()
-  create(@Body() dto: CreateHistoryDto) {
-    return this.historyService.create(dto);
+  create(
+    @Body() dto: CreateHistoryDto,
+    @Req() req: Request & { user?: { id?: string; role?: string } },
+  ) {
+    return this.historyService.create(dto, req.user?.id ?? '', req.user?.role ?? 'user');
   }
 
   @Get(':userId')
@@ -22,7 +26,7 @@ export class HistoryController {
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.historyService.remove(id);
+  remove(@Param('id') id: string, @Req() req: Request & { user?: { id?: string; role?: string } }) {
+    return this.historyService.remove(id, req.user?.id ?? '', req.user?.role ?? 'user');
   }
 }

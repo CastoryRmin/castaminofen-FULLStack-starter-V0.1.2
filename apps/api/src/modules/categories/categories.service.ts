@@ -12,7 +12,7 @@ export class CategoriesService {
   }
 
   findAll() {
-    return this.prisma.category.findMany();
+    return this.prisma.category.findMany({ orderBy: { name: 'asc' } });
   }
 
   async findOne(id: string) {
@@ -22,10 +22,14 @@ export class CategoriesService {
   }
 
   async update(id: string, dto: UpdateCategoryDto) {
+    const category = await this.prisma.category.findUnique({ where: { id } });
+    if (!category) throw new NotFoundException('Category not found');
     return this.prisma.category.update({ where: { id }, data: dto });
   }
 
   async remove(id: string) {
+    const category = await this.prisma.category.findUnique({ where: { id } });
+    if (!category) throw new NotFoundException('Category not found');
     await this.prisma.category.delete({ where: { id } });
     return { deleted: true };
   }
